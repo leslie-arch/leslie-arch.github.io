@@ -57,8 +57,46 @@ $$q_{t}^{p} = max(\hat{q}_{1,t}^{p}, \hat{q}_{2,t}^{p}, \hat{q}_{3,t}^{p}), t \i
 ## 协同注意力机制
 文章提供了两种生成图像和问题映射的协同注意力机制。
 
-<center style="width:70%;margin:auto">
-<img src="https://d3i71xaburhd42.cloudfront.net/fb9d253258d6b3beceb9d6cd7bba6e0a29ab875b/250px/4-Figure2-1.png" width="80%">
+<div>
+<img src="https://d3i71xaburhd42.cloudfront.net/fb9d253258d6b3beceb9d6cd7bba6e0a29ab875b/250px/4-Figure2-1.png" width="70%" />
 Figure 2: (a) Parallel co-attention mechanism; (b) Alternating co-attention mechanism. 
-</center>
+</div>
 
+### Parallel Co-Attention
+Parallel Co-Attention通过计算image和question特征之间的相似性，使image和question联系起来，相关矩阵的计算方法：
+$$C = tanh(Q^{T}W_{b}V)$$
+把$C$当成一种特征，预测image和question的attention maps。
+
+$$H^{v} = tanh(W_{v}+(W_{q}Q)C), H^{q} = tanh(W_{q}Q + (W_{v}V)C^{T})$$
+$$a^{\nu} = softmax(\omega_{hv}^{T}H^{\nu}), a^{q} = softmax(\omega_{hq}^{T}H^{q})$$
+$$\hat{v} = \sum_{n=1}^{N}{a_{n}^{v}v_{n}}, \hat{q} = \sum_{t=1}^{T}{a_{t}^{q}v_{t}}$$
+
+### Alternating Co-Attention
+整个过程分为三部分：
+1) 将问题映射成一个单向量$q$
+2) 基于$q$，集中注意于image
+3) 基于attended image feature, 集中注意question
+
+注意力的操作部署如下：
+$$H = tanh(W_{x}X + (W_{g}g)\mathbb{1}^{T})$$
+$$a^{x} = softmax(w_{hx}^{T}H)$$
+$$\hat{x} = \suma_{i}^{x}x_{i}$$
+
+第一步： X = Q, and g is 0;
+第二步： X = V where V is the image features，guidance g is intermediate attended question feature ^s from the first step
+第三步： we use the attended image feature ^v as the guidance to attend the question again, i.e., X = Q and g = ^v.
+
+### 预测答案编码
+文章将VQA视为分类任务，基于图像和问题的协同注意力特征预测答案。
+
+<div>
+<img src="https://d3i71xaburhd42.cloudfront.net/fb9d253258d6b3beceb9d6cd7bba6e0a29ab875b/5-Figure3-1.png" width="70%" />
+Figure 3: (a) Hierarchical question encoding; (b) Encoding for predicting answers
+</div>
+
+按上图右所示，使用MLP循环编码注意力特征得到最终答案。
+
+$$h^{w} = tanh(W_{w}(\hat{q}^{w} + \hat{v}^{w}))$$
+$$h^{p} = tanh(W_{p}[(\hat{q}^{p} + \hat{v}^{p}), h^{w}])$$
+$$h^{s} = tanh(W_{s}[(\hat{q}^{s} + \hat{v}^{w}), h^{p}])$$
+$$p = softmax(W_{h}h^{s})$$

@@ -11,16 +11,20 @@ author: Leslie He
 language: en
 timezone: 'Asia/Shanghai'
 
-markdown_it_plus:
-    highlight: true
-    html: true
-    xhtmlOut: true
-    breaks: true
-    langPrefix:
-    linkify: true
-    typographer:
-    quotes: “”‘’
-    pre_class: highlight
+#markdown_it_plus:
+#    highlight: true
+#    html: true
+#    xhtmlOut: true
+#    breaks: true
+#    langPrefix:
+#    linkify: true
+#    typographer:
+#    quotes: “”‘’
+#    pre_class: highlight
+
+markdown:
+  plugins:
+    - markdown-it-latex2img
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
