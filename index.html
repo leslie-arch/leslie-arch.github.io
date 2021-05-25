@@ -132,20 +132,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -174,6 +174,251 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://leslie-arch.github.io/2021/05/22/%E6%AF%8F%E6%97%A5%E6%9D%82%E8%B0%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leslie He">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Generic Visual AI">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/05/22/%E6%AF%8F%E6%97%A5%E6%9D%82%E8%B0%88/" class="post-title-link" itemprop="url">每日杂谈</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-05-22 17:56:59" itemprop="dateCreated datePublished" datetime="2021-05-22T17:56:59+08:00">2021-05-22</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-05-24 23:11:21" itemprop="dateModified" datetime="2021-05-24T23:11:21+08:00">2021-05-24</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/VQG/" itemprop="url" rel="index"><span itemprop="name">VQG</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/VQG/VQA/" itemprop="url" rel="index"><span itemprop="name">VQA</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="vqg-综述"><a class="markdownIt-Anchor" href="#vqg-综述"></a> VQG 综述</h1>
+<p>论文title <img src="https://www.webofscience.com/wos/alldb/full-record/WOS:000582586400002" alt="Visual Question Generation: The State of the Art"></p>
+<p>Question generation : 以原始文本，数据库和语义表示等为输入自动生成问题。<br>
+其中最重要的两个子任务：</p>
+<ul>
+<li>理解图像
+<ul>
+<li>对象检测</li>
+<li>对象分类和标签</li>
+<li>对象关系检测</li>
+<li>场景理解</li>
+<li>场景分类</li>
+<li>其它</li>
+</ul>
+</li>
+<li>生成有效问题的词序列</li>
+</ul>
+<p>通常首先通过CNN获取图像的表示，再通过RNN获取生成的词序列。</p>
+<p>VQA包括在给定的图像上下文中回答给定的问题,几乎所有用于此目的的VQA数据集都包含人工预先设定的问题，最近新生成的推理数据集却与此不同，<br>
+其中的问题及相应的答案是使用功能性编程方法获得的。</p>
+<h1 id="视觉和自然语言任务"><a class="markdownIt-Anchor" href="#视觉和自然语言任务"></a> 视觉和自然语言任务</h1>
+<p>视觉问题可分为三类：</p>
+<ul>
+<li>基础问题 :: 问题答案可由图像本身中存在的信息得出，不需要外部知识来源</li>
+<li>基于常识的问题 :: 需要外部的常识知识源以及图像中的基础信息</li>
+<li>world knowledge-based question :: 需要外部知识源用于问题生成和回答</li>
+</ul>
+<p>所有VQA算法的框架流程都包含：</p>
+<ul>
+<li>获取图像特征</li>
+<li>抽取问题特征</li>
+<li>结合问题特征和图像特征预测问题答案</li>
+</ul>
+<p>按过程可分为四类： Bayesian， encoder-decover, attention based, bilinear pooling<br>
+同时，使用一些其它外部知识源回答视觉问题的领域也有了新的发展。</p>
+<h2 id="bayesian-models"><a class="markdownIt-Anchor" href="#bayesian-models"></a> Bayesian Models</h2>
+<p>VQA最早是在Bayesian框架中进行问题推理进行自动语义文本解析和场景分割。Bayesian过程可以对问题进行分类，从而检测答案类型。<br>
+该模型证明了开放式答案预测可以转化为多项选择问题。</p>
+<h2 id="encoder-decoder-models"><a class="markdownIt-Anchor" href="#encoder-decoder-models"></a> Encoder-Decoder Models</h2>
+<p>Cho 和 Sutskever 提出的简单的序列到序列机器翻译 encoder-decoder模型被认为是语言生成任务中的突破，对图像和问题信息进行编码然后对其解码从而得到答案的灵感也来源于此。<br>
+基于单LSTM的编/解码器模型依次将问题和答案的单词分别进行编/解码，通过CNN提取的图像特征作为每个LSTM单元的输入。<br>
+<img src="https://arxiv.org/abs/1505.02074" alt="Ren et al"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://leslie-arch.github.io/2021/05/20/R%E8%AF%AD%E8%A8%80%E5%B0%8F%E6%8A%80%E5%B7%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leslie He">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Generic Visual AI">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/05/20/R%E8%AF%AD%E8%A8%80%E5%B0%8F%E6%8A%80%E5%B7%A7/" class="post-title-link" itemprop="url">R语言小技巧</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-05-20 11:54:50" itemprop="dateCreated datePublished" datetime="2021-05-20T11:54:50+08:00">2021-05-20</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-05-21 10:28:42" itemprop="dateModified" datetime="2021-05-21T10:28:42+08:00">2021-05-21</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/R/" itemprop="url" rel="index"><span itemprop="name">R</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/R/devel/" itemprop="url" rel="index"><span itemprop="name">devel</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="r-语言使用记录"><a class="markdownIt-Anchor" href="#r-语言使用记录"></a> R 语言使用记录</h1>
+<h2 id="list"><a class="markdownIt-Anchor" href="#list"></a> list</h2>
+<ul>
+<li>使用&quot;names()&quot;方法查看list中的成员</li>
+<li>列表的一个元素也可以称为列表的一个“变量”， 单个列表元素必须用两重方括号格式访问</li>
+<li>列表的单个元素也可以用$格式访问</li>
+<li>列表的单个元素也可以用$格式访问</li>
+</ul>
+<h1 id="lua"><a class="markdownIt-Anchor" href="#lua"></a> Lua</h1>
+<h2 id="lua中的面向对象"><a class="markdownIt-Anchor" href="#lua中的面向对象"></a> Lua中的面向对象</h2>
+<p>对象由属性和方法组成。LUA中最基本的结构是table，所以需要用table来描述对象的属性。<br>
+lua 中的 function 可以用来表示方法。那么LUA中的类可以通过 table + function 模拟出来。<br>
+至于继承，可以通过 metetable 模拟出来（不推荐用，只模拟最基本的对象大部分时间够用了）。</p>
+<p>使用点号(.)来访问类的属性，使用冒号 : 来访问类的成员函数。</p>
+<pre><code>-- 元类
+Shape = &#123;area = 0&#125;
+
+-- 基础类方法 new
+function Shape:new (o,side)
+  o = o or &#123;&#125;
+  setmetatable(o, self)
+  self.__index = self
+  side = side or 0
+  self.area = side*side;
+  return o
+end
+
+-- 基础类方法 printArea
+function Shape:printArea ()
+  print(&quot;面积为 &quot;,self.area)
+end
+
+-- 创建对象
+myshape = Shape:new(nil,10)
+
+myshape:printArea()
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
