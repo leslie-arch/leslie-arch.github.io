@@ -240,7 +240,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1>VQG 综述</h1>
+          <h1 id="vqg-综述"><a class="markdownIt-Anchor" href="#vqg-综述"></a> VQG 综述</h1>
 <p>论文title <a target="_blank" rel="noopener" href="https://www.webofscience.com/wos/alldb/full-record/WOS:000582586400002">Visual Question Generation: The State of the Art</a></p>
 <p>Question generation : 以原始文本，数据库和语义表示等为输入自动生成问题。<br>
 其中最重要的两个子任务：</p>
@@ -260,7 +260,7 @@
 <p>通常首先通过CNN获取图像的表示，再通过RNN获取生成的词序列。</p>
 <p>VQA包括在给定的图像上下文中回答给定的问题,几乎所有用于此目的的VQA数据集都包含人工预先设定的问题，最近新生成的推理数据集却与此不同，<br>
 其中的问题及相应的答案是使用功能性编程方法获得的。</p>
-<h1>视觉和自然语言任务</h1>
+<h1 id="视觉和自然语言任务"><a class="markdownIt-Anchor" href="#视觉和自然语言任务"></a> 视觉和自然语言任务</h1>
 <p>视觉问题可分为三类：</p>
 <ul>
 <li>基础问题 :: 问题答案可由图像本身中存在的信息得出，不需要外部知识来源</li>
@@ -275,32 +275,32 @@
 </ul>
 <p>按过程可分为四类： Bayesian， encoder-decover, attention based, bilinear pooling<br>
 同时，使用一些其它外部知识源回答视觉问题的领域也有了新的发展。</p>
-<h2 id="Bayesian-Models">Bayesian Models</h2>
+<h2 id="bayesian-models"><a class="markdownIt-Anchor" href="#bayesian-models"></a> Bayesian Models</h2>
 <p>VQA最早是在Bayesian框架中进行问题推理进行自动语义文本解析和场景分割。Bayesian过程可以对问题进行分类，从而检测答案类型。<br>
 该模型证明了开放式答案预测可以转化为多项选择问题。</p>
-<h2 id="Encoder-Decoder-Models">Encoder-Decoder Models</h2>
+<h2 id="encoder-decoder-models"><a class="markdownIt-Anchor" href="#encoder-decoder-models"></a> Encoder-Decoder Models</h2>
 <p>Cho 和 Sutskever 提出的简单的序列到序列机器翻译 encoder-decoder模型被认为是语言生成任务中的突破，对图像和问题信息进行编码然后对其解码从而得到答案的灵感也来源于此。<br>
 基于单LSTM的编/解码器模型依次将问题和答案的单词分别进行编/解码，通过CNN提取的图像特征作为每个LSTM单元的输入。<br>
 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1505.02074">Ren et al</a>提出在回答是单个单词的情况下，将&lt;问题,回答&gt;特征向量对连接作为LSTM的输入。在ImageNet挑战的训练过程中使用VGGNet<br>
 最后一层隐藏层作为视觉嵌入表示。<br>
 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1505.05612">Gao et al</a>提出的模型使用两个独立的LSTM，一个用于问题编码，一个用于回答解码。回答生成的融合模块使用深度CNN整合问题编码表示，<br>
 回答编码表示和图像表示。</p>
-<h2 id="注意力模型">注意力模型</h2>
+<h2 id="注意力模型"><a class="markdownIt-Anchor" href="#注意力模型"></a> 注意力模型</h2>
 <p>所有注意力模型都使用由CNN生成的区域特异性和局部特征。<br>
 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1511.07394">Shih et al.</a>基于注意力的图像区域和问题表示给每个回答打分，在多个候选解答中的预测正确回答。</p>
-<h2 id="bilinerar-pooling-模型">bilinerar pooling 模型</h2>
+<h2 id="bilinerar-pooling-模型"><a class="markdownIt-Anchor" href="#bilinerar-pooling-模型"></a> bilinerar pooling 模型</h2>
 <p>图像和问题特征之间深层交互的紧凑型多模双线性池化。<br>
-bilinear pooling主要用于特征融合，对于从同一个样本提取出来的特征 <img src="https://math.now.sh?inline=x" style="display:inline-block;margin: 0;"> 和特征 <img src="https://math.now.sh?inline=y" style="display:inline-block;margin: 0;"> ，通过bilinear pooling得到两个特征融合后的向量，进而用来分类。<br>
-如果特征 <img src="https://math.now.sh?inline=x" style="display:inline-block;margin: 0;"> 和特征 <img src="https://math.now.sh?inline=y" style="display:inline-block;margin: 0;"> 来自两个特征提取器，则被称为多模双线性池化（MBP，Multimodal Bilinear Pooling）；<br>
-如果特征 <img src="https://math.now.sh?inline=x" style="display:inline-block;margin: 0;"> =特征 <img src="https://math.now.sh?inline=y" style="display:inline-block;margin: 0;">，则被称为同源双线性池化（HBP，Homogeneous Bilinear Pooling）或者二阶池化（Second-order Pooling）。</p>
-<h2 id="结合外部知识的VQA">结合外部知识的VQA</h2>
+bilinear pooling主要用于特征融合，对于从同一个样本提取出来的特征 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 和特征 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span> ，通过bilinear pooling得到两个特征融合后的向量，进而用来分类。<br>
+如果特征 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> 和特征 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span> 来自两个特征提取器，则被称为多模双线性池化（MBP，Multimodal Bilinear Pooling）；<br>
+如果特征 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> =特征 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span>，则被称为同源双线性池化（HBP，Homogeneous Bilinear Pooling）或者二阶池化（Second-order Pooling）。</p>
+<h2 id="结合外部知识的vqa"><a class="markdownIt-Anchor" href="#结合外部知识的vqa"></a> 结合外部知识的VQA</h2>
 <p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1511.06973">Wu et al.</a>使用VGGNet获取图像的高层概念和属性，然后使用这些特征生成SPARQL查询请求从知识库中抽取相关信息。<br>
 knowledge-based VQA,视觉概念分为三种，为每张图片标识对象，属性和场景。通常使用RDF元组存储这些概念。<br>
-fact-based VQA, 通过学习问题和基于知识的问题的关联回答组合的问题。从图片中抽取的视觉概念以<img src="https://math.now.sh?inline=%28subject%2C%20relation%2C%20object%29" style="display:inline-block;margin: 0;">元组的方式存储。使用元组生成SPARQL的查询<br>
+fact-based VQA, 通过学习问题和基于知识的问题的关联回答组合的问题。从图片中抽取的视觉概念以<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">(</mo><mi>s</mi><mi>u</mi><mi>b</mi><mi>j</mi><mi>e</mi><mi>c</mi><mi>t</mi><mo separator="true">,</mo><mi>r</mi><mi>e</mi><mi>l</mi><mi>a</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi><mo separator="true">,</mo><mi>o</mi><mi>b</mi><mi>j</mi><mi>e</mi><mi>c</mi><mi>t</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(subject, relation, object)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">s</span><span class="mord mathdefault">u</span><span class="mord mathdefault">b</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mord mathdefault">e</span><span class="mord mathdefault">c</span><span class="mord mathdefault">t</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">a</span><span class="mord mathdefault">t</span><span class="mord mathdefault">i</span><span class="mord mathdefault">o</span><span class="mord mathdefault">n</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">o</span><span class="mord mathdefault">b</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mord mathdefault">e</span><span class="mord mathdefault">c</span><span class="mord mathdefault">t</span><span class="mclose">)</span></span></span></span>元组的方式存储。使用元组生成SPARQL的查询<br>
 从知识图谱中抽取问题答案。<br>
 world knowledge VQA，结合其背景知识回答特定人物的相关问题。该问题的第一个子任务是可视化实体链接，处理人脸定位和人脸识别。第二个子任务需要识别图片和问题中实体，<br>
 然后遍历知识图，如Wikidata，来抽取相关事实。</p>
-<h1>图像描述生成</h1>
+<h1 id="图像描述生成"><a class="markdownIt-Anchor" href="#图像描述生成"></a> 图像描述生成</h1>
 <p>和VQG一样，图像描述任务也是以图片为输入，期望输出为文本形态。可将其视为一种特殊的机器翻译，将视觉信息翻译成文本格式。<br>
 图像加注方法可以分为3类：基于模板的图像加注，基于检索的图像加注和生成新的图像加注。<br>
 新的图像加注与生成新的问题方法类似。</p>
@@ -340,7 +340,7 @@ m-RNN模型包含三个主要部分：语言模型部分，视觉部分（CNN）
 <li>Maxmum Entropy Language Model</li>
 <li>DMSM (模型相似度)</li>
 </ul>
-<h1>Text Question Generation and Answering</h1>
+<h1 id="text-question-generation-and-answering"><a class="markdownIt-Anchor" href="#text-question-generation-and-answering"></a> Text Question Generation and Answering</h1>
 <p>Inverse VQA:<br>
 VQA是根据图像和问题生成答案，iVQA是给出answer,image, 生成与之相关的question。<br>
 过程与VQA过程相似，用到的模型也是Bi-LSTM, GUR和encoder-decoder模型。</p>
@@ -354,7 +354,7 @@ Dynamic memory network - 包含四个部分：输入模块，问题模块，epis
 <li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1603.06807">Factoid question generation model</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/E17-1036/">RNN-based encoder-decoder model</a></li>
 </ul>
-<h1>相关的数据集</h1>
+<h1 id="相关的数据集"><a class="markdownIt-Anchor" href="#相关的数据集"></a> 相关的数据集</h1>
 <ul>
 <li>DAQUAQ</li>
 <li>COCO QA</li>
