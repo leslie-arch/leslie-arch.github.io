@@ -20,12 +20,12 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;leslie-arch.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;}}</script>
-<meta name="description" content="R 语言使用记录  list  使用&quot;names()&quot;方法查看list中的成员 列表的一个元素也可以称为列表的一个“变量”， 单个列表元素必须用两重方括号格式访问 列表的单个元素也可以用$格式访问 列表的单个元素也可以用$格式访问   packages  已加载的包 :: (.packages()) 卸除加载包 :: detach(“package:name”) 删除安装包">
+<meta name="description" content="R 语言使用记录 list  使用&quot;names()&quot;方法查看list中的成员 列表的一个元素也可以称为列表的一个“变量”， 单个列表元素必须用两重方括号格式访问 列表的单个元素也可以用$格式访问 列表的单个元素也可以用$格式访问  packages  已加载的包 :: (.packages()) 卸除加载包 :: detach(“package:name”) 删除安装包 ::">
 <meta property="og:type" content="article">
 <meta property="og:title" content="R语言小技巧">
 <meta property="og:url" content="https://leslie-arch.github.io/2021/05/20/R%E8%AF%AD%E8%A8%80%E5%B0%8F%E6%8A%80%E5%B7%A7/index.html">
 <meta property="og:site_name" content="Generic Visual AI">
-<meta property="og:description" content="R 语言使用记录  list  使用&quot;names()&quot;方法查看list中的成员 列表的一个元素也可以称为列表的一个“变量”， 单个列表元素必须用两重方括号格式访问 列表的单个元素也可以用$格式访问 列表的单个元素也可以用$格式访问   packages  已加载的包 :: (.packages()) 卸除加载包 :: detach(“package:name”) 删除安装包">
+<meta property="og:description" content="R 语言使用记录 list  使用&quot;names()&quot;方法查看list中的成员 列表的一个元素也可以称为列表的一个“变量”， 单个列表元素必须用两重方括号格式访问 列表的单个元素也可以用$格式访问 列表的单个元素也可以用$格式访问  packages  已加载的包 :: (.packages()) 卸除加载包 :: detach(“package:name”) 删除安装包 ::">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-05-20T03:54:50.000Z">
 <meta property="article:modified_time" content="2021-06-01T01:39:38.674Z">
@@ -124,7 +124,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#r-%E8%AF%AD%E8%A8%80%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text"> R 语言使用记录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#list"><span class="nav-number">1.1.</span> <span class="nav-text"> list</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#packages"><span class="nav-number">1.2.</span> <span class="nav-text"> packages</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lua"><span class="nav-number">2.</span> <span class="nav-text"> Lua</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#lua%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.1.</span> <span class="nav-text"> Lua中的面向对象</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python"><span class="nav-number">3.</span> <span class="nav-text"> python</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#load-python-module-or-class-dynamically"><span class="nav-number">3.1.</span> <span class="nav-text"> load python module or class dynamically</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#using-the-import-magic-method"><span class="nav-number">3.1.1.</span> <span class="nav-text"> Using the import Magic Method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#using-pythons-imp-module"><span class="nav-number">3.1.2.</span> <span class="nav-text"> Using Python’s imp Module</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">R 语言使用记录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#list"><span class="nav-number">1.1.</span> <span class="nav-text">list</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#packages"><span class="nav-number">1.2.</span> <span class="nav-text">packages</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">Lua</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Lua%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.1.</span> <span class="nav-text">Lua中的面向对象</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">python</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#load-python-module-or-class-dynamically"><span class="nav-number">3.1.</span> <span class="nav-text">load python module or class dynamically</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-the-import-Magic-Method"><span class="nav-number">3.1.1.</span> <span class="nav-text">Using the import Magic Method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-Python%E2%80%99s-imp-Module"><span class="nav-number">3.1.2.</span> <span class="nav-text">Using Python’s imp Module</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -247,22 +247,22 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="r-语言使用记录"><a class="markdownIt-Anchor" href="#r-语言使用记录"></a> R 语言使用记录</h1>
-<h2 id="list"><a class="markdownIt-Anchor" href="#list"></a> list</h2>
+        <h1>R 语言使用记录</h1>
+<h2 id="list">list</h2>
 <ul>
 <li>使用&quot;names()&quot;方法查看list中的成员</li>
 <li>列表的一个元素也可以称为列表的一个“变量”， 单个列表元素必须用两重方括号格式访问</li>
 <li>列表的单个元素也可以用$格式访问</li>
 <li>列表的单个元素也可以用$格式访问</li>
 </ul>
-<h2 id="packages"><a class="markdownIt-Anchor" href="#packages"></a> packages</h2>
+<h2 id="packages">packages</h2>
 <ul>
 <li>已加载的包 :: (.packages())</li>
 <li>卸除加载包 :: detach(“package:name”)</li>
 <li>删除安装包 :: remove.packages(c(p1, p2, …), lib = file.path(“path”, “to”, “library”))</li>
 </ul>
-<h1 id="lua"><a class="markdownIt-Anchor" href="#lua"></a> Lua</h1>
-<h2 id="lua中的面向对象"><a class="markdownIt-Anchor" href="#lua中的面向对象"></a> Lua中的面向对象</h2>
+<h1>Lua</h1>
+<h2 id="Lua中的面向对象">Lua中的面向对象</h2>
 <p>对象由属性和方法组成。LUA中最基本的结构是table，所以需要用table来描述对象的属性。<br>
 lua 中的 function 可以用来表示方法。那么LUA中的类可以通过 table + function 模拟出来。<br>
 至于继承，可以通过 metetable 模拟出来（不推荐用，只模拟最基本的对象大部分时间够用了）。</p>
@@ -290,9 +290,9 @@ myshape = Shape:new(nil,10)
 
 myshape:printArea()
 </code></pre>
-<h1 id="python"><a class="markdownIt-Anchor" href="#python"></a> python</h1>
-<h2 id="load-python-module-or-class-dynamically"><a class="markdownIt-Anchor" href="#load-python-module-or-class-dynamically"></a> load python module or class dynamically</h2>
-<h3 id="using-the-import-magic-method"><a class="markdownIt-Anchor" href="#using-the-import-magic-method"></a> Using the <strong>import</strong> Magic Method</h3>
+<h1>python</h1>
+<h2 id="load-python-module-or-class-dynamically">load python module or class dynamically</h2>
+<h3 id="Using-the-import-Magic-Method">Using the <strong>import</strong> Magic Method</h3>
 <pre><code>########################################################################
 class DynamicImporter:
 &quot;&quot;&quot;&quot;&quot;&quot;
@@ -308,7 +308,7 @@ class DynamicImporter:
 if __name__ == &quot;__main__&quot;:
     DynamicImporter(&quot;decimal&quot;, &quot;Context&quot;)
 </code></pre>
-<h3 id="using-pythons-imp-module"><a class="markdownIt-Anchor" href="#using-pythons-imp-module"></a> Using Python’s imp Module</h3>
+<h3 id="Using-Python’s-imp-Module">Using Python’s imp Module</h3>
 <pre><code>import imp
 import sys
 #----------------------------------------------------------------------
