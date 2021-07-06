@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;leslie-arch.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;}}</script>
+<meta name="description" content="神经网络模型都通过前向推理和反向梯度传播进行模型优化，并通过权重参数更新改善网络损失函数。 solver学习的任务分为三个阶段：监督优化，参数更新，计算损失和梯度。 通常优化器在网络中被抽象为标准的方法。训练时可以通过solver配置文件定义参数，常用的配置参数 达40多个。 123456789101112131415161718192021net                       we">
+<meta property="og:type" content="article">
+<meta property="og:title" content="solver配置参数">
+<meta property="og:url" content="https://leslie-arch.github.io/2021/07/06/solver%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0/index.html">
+<meta property="og:site_name" content="Generic Visual AI">
+<meta property="og:description" content="神经网络模型都通过前向推理和反向梯度传播进行模型优化，并通过权重参数更新改善网络损失函数。 solver学习的任务分为三个阶段：监督优化，参数更新，计算损失和梯度。 通常优化器在网络中被抽象为标准的方法。训练时可以通过solver配置文件定义参数，常用的配置参数 达40多个。 123456789101112131415161718192021net                       we">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-07-06T02:18:12.000Z">
+<meta property="article:modified_time" content="2021-07-06T02:53:56.727Z">
+<meta property="article:author" content="Leslie He">
+<meta property="article:tag" content="pytorch">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://leslie-arch.github.io/2021/07/06/solver%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;leslie-arch.github.io&#x2F;2021&#x2F;07&#x2F;06&#x2F;solver%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;07&#x2F;06&#x2F;solver配置参数&#x2F;&quot;,&quot;title&quot;:&quot;solver配置参数&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>solver配置参数 | Generic Visual AI</title><script src="/js/config.js"></script>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Generic Visual AI</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Leslie Arch</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+        <li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+        <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E7%BD%91%E7%BB%9C%E5%AE%9A%E4%B9%89prototxt%E7%9B%B8%E5%85%B3"><span class="nav-number">1.</span> <span class="nav-text"> 模型网络定义prototxt相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81"><span class="nav-number">2.</span> <span class="nav-text"> 模型运行状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E7%BD%91%E7%BB%9C%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text"> 测试网络参数配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0%E7%8E%87%E7%9B%B8%E5%85%B3%E7%9A%84%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text"> 学习率相关的参数配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0"><span class="nav-number">5.</span> <span class="nav-text"> 模型优化相关参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E4%BF%9D%E5%AD%98%E5%BF%AB%E7%85%A7%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0"><span class="nav-number">6.</span> <span class="nav-text"> 模型保存快照相关参数</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Leslie He</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://leslie-arch.github.io/2021/07/06/solver%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leslie He">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Generic Visual AI">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          solver配置参数
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-07-06 10:18:12 / Modified: 10:53:56" itemprop="dateCreated datePublished" datetime="2021-07-06T10:18:12+08:00">2021-07-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/optimizer/" itemprop="url" rel="index"><span itemprop="name">optimizer</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/train/" itemprop="url" rel="index"><span itemprop="name">train</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>神经网络模型都通过前向推理和反向梯度传播进行模型优化，并通过权重参数更新改善网络损失函数。<br>
+solver学习的任务分为三个阶段：监督优化，参数更新，计算损失和梯度。</p>
+<p>通常优化器在网络中被抽象为标准的方法。训练时可以通过solver配置文件定义参数，常用的配置参数<br>
+达40多个。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">net                       weight_decay              </span><br><span class="line">net_param                 regularization_type       </span><br><span class="line">train_net                 stepsize                  </span><br><span class="line">test_net                  stepvalue                 </span><br><span class="line">train_net_param           clip_gradients            </span><br><span class="line">test_net_param            snapshot                  </span><br><span class="line">train_state               snapshot_prefix           </span><br><span class="line">test_state                snapshot_diff             </span><br><span class="line">test_iter                 snapshot_format           </span><br><span class="line">test_interval             solver_mode               </span><br><span class="line">test_compute_loss         device_id                 </span><br><span class="line">test_initialization       random_seed               </span><br><span class="line">base_lr                   type                      </span><br><span class="line">display                   delta                     </span><br><span class="line">average_loss              momentum2                 </span><br><span class="line">max_iter                  rms_decay                 </span><br><span class="line">iter_size                 debug_info                </span><br><span class="line">lr_policy                 snapshot_after_train      </span><br><span class="line">gamma                     solver_type               </span><br><span class="line">power                     layer_wise_reduce         </span><br><span class="line">momentum                  weights             </span><br></pre></td></tr></table></figure>
+<h2 id="模型网络定义prototxt相关"><a class="markdownIt-Anchor" href="#模型网络定义prototxt相关"></a> 模型网络定义prototxt相关</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">net: &quot;train_test.prototxt&quot;</span><br><span class="line">net_param &#123;</span><br><span class="line">  name: &quot;LeNet&quot;</span><br><span class="line">  layers &#123;</span><br><span class="line">    name: &quot;mnist&quot;</span><br><span class="line">    type: DATA</span><br><span class="line">    top: &quot;data&quot;</span><br><span class="line">    top: &quot;label&quot;</span><br><span class="line">    data_param &#123;</span><br><span class="line">      source: &quot;examples/mnist/mnist_train_lmdb&quot;</span><br><span class="line">      backend: LMDB</span><br><span class="line">      batch_size: 64</span><br><span class="line">    &#125;</span><br><span class="line">    transform_param &#123;</span><br><span class="line">      scale: 0.00390625</span><br><span class="line">    &#125;</span><br><span class="line">    include: &#123; phase: TRAIN &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"> ...</span><br><span class="line"></span><br><span class="line">  layers &#123;</span><br><span class="line">    name: &quot;loss&quot;</span><br><span class="line">    type: SOFTMAX_LOSS</span><br><span class="line">    bottom: &quot;ip2&quot;</span><br><span class="line">    bottom: &quot;label&quot;</span><br><span class="line">    top: &quot;loss&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">train_net: &quot;train.prototxt&quot;</span><br><span class="line">test_net: &quot;test.prototxt&quot;</span><br><span class="line">train_net_param： &#123;...&#125;</span><br><span class="line">test_net_param： &#123;...&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>net :: 训练网络用的prototxt文件，该文件可能包含不止一个的测试网络，通常不与train_net和test_net同时定义；</li>
+<li>net_param :: 内联的训练网络prototxt定义，可能定义有不止一个的测试网络，通常忽略；</li>
+<li>train_net_param :: 内联的训练网络prototxt定义，通常忽略；</li>
+<li>test_net_param :: 内联的测试网络prototxt定义，通常忽略；</li>
+<li>train_net :: 训练网络用的prototxt文件，通常不与net同时定义；</li>
+<li>test_net :: 测试网络用的prototxt文件，通常不与net同时定义；</li>
+</ul>
+<h2 id="模型运行状态"><a class="markdownIt-Anchor" href="#模型运行状态"></a> 模型运行状态</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">train_state: &#123; </span><br><span class="line">phase: TRAIN</span><br><span class="line">&#125;</span><br><span class="line">test_state: &#123; </span><br><span class="line">phase: TEST</span><br><span class="line">stage: &#x27;test-on-test&#x27; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>train_state :: 训练状态定义，默认为TRAIN，否则按照模型网络prototxt定义的来运行；</li>
+<li>test_state :: 测试状态定义，默认为TEST并在测试集上进行测试，否则按照模型网络prototxt定义的来运行；</li>
+</ul>
+<h2 id="测试网络参数配置"><a class="markdownIt-Anchor" href="#测试网络参数配置"></a> 测试网络参数配置</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">test_iter: 50             </span><br><span class="line">test_interval: 200</span><br><span class="line">test_compute_loss: false    </span><br><span class="line">test_initialization: true</span><br></pre></td></tr></table></figure>
+<ul>
+<li>test_iter :: 测试网络前向推理的迭代次数，注意每测试迭代一次是一个测试网络定义的batch size大小，test_iter与test_batch_size的乘积应为整个测试集的大小；</li>
+<li>test_interval :: 训练时每隔多少次迭代则进行一次测试，默认为0即每次训练完后都会进行一次测试，应该要配置该参数，否则训练速度超级慢；</li>
+<li>test_compute_loss :: 测试时是否计算损失值，默认为假，通常用于debug分析用；</li>
+<li>test_initialization :: 在第一次训练迭代之前先运行一次测试，用于确保内存够用和打印初始的loss值，默认为真；</li>
+</ul>
+<h2 id="学习率相关的参数配置"><a class="markdownIt-Anchor" href="#学习率相关的参数配置"></a> 学习率相关的参数配置</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">base_lr: 0.1</span><br><span class="line">lr_policy: &quot;multistep&quot;</span><br><span class="line">max_iter: 100000</span><br><span class="line">stepvalue: 10000</span><br><span class="line">stepsize: 5000</span><br><span class="line">gamma: 0.1</span><br><span class="line">power: 0.75</span><br></pre></td></tr></table></figure>
+<ul>
+<li>base_lr :: 初始的学习率；</li>
+<li>lr_policy :: 学习率调整策略；</li>
+<li>maxiter :: 训练迭代的最大次数；</li>
+<li>stepsize :: lr_policy为“step”时学习率多少次训练迭代会进行调整；</li>
+<li>stepvalue :: lr_policy为“multistep”时学习率多少次训练迭代会进行调整，该参数可设置多个以用于多次学习率调整；</li>
+<li>gamma :: 用于计算学习率的参数，lr_policy为step、exp、inv、sigmoid时会使用到；</li>
+<li>power :: 用于计算学习率的参数，lr_policy为inv、poly时会使用到；</li>
+</ul>
+<p>lr_policy学习率调整策略：</p>
+<ul>
+<li>fixed :: 保持base_lr不变.</li>
+<li>step :: 如果设置为step，则还需要设置一个stepsize，返回base_lr * gamma ^ (floor(iter / stepsize))，其中iter表示当前的迭代次数</li>
+<li>exp :: 返回base_lr * gamma ^ iter， iter为当前迭代次数</li>
+<li>inv :: 如果设置为inv，还需要设置一个power，返回base_lr * (1 + gamma * iter) ^ (- power)</li>
+<li>multistep :: 如果设置为multistep，则还需要设置一个stepvalue。这个参数和step很相似，step是均匀等间隔变化，而multstep则是根据stepvalue值变化</li>
+<li>poly :: 学习率进行多项式误差，返回 base_lr * (1 - iter/max_iter) ^ (power)</li>
+<li>sigmoid :: sigmas，返回 base_lr * ( 1/(1 + exp(-gamma * (iter - stepsize))))</li>
+</ul>
+<h2 id="模型优化相关参数"><a class="markdownIt-Anchor" href="#模型优化相关参数"></a> 模型优化相关参数</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">type: &quot;Adam&quot;</span><br><span class="line">solver_type: &quot;Adam&quot;(已弃用)</span><br><span class="line">momentum: 0.9</span><br><span class="line">momentum2: 0.999</span><br><span class="line">rms_decay: 0.98</span><br><span class="line">delta: 1e-8</span><br><span class="line">weight_decay: 0.0005</span><br><span class="line">regularization_type: &quot;L2&quot;</span><br><span class="line">clip_gradients: 0.9</span><br></pre></td></tr></table></figure>
+<ul>
+<li>type :: 优化器类型；</li>
+<li>solver_type :: 已弃用的优化器类型；</li>
+<li>momentum :: 用到动量来进行权重优化的优化器动量；</li>
+<li>momentum2 :: “Adam”优化器的动量参数；</li>
+<li>rms_decay :: “RMSProp”优化器的衰减参数，其计算方式为MeanSquare(t) = rms_decay*MeanSquare(t-1) + (1-rms_decay)*SquareGradient(t)</li>
+<li>delta :: RMSProp、AdaGrad、AdaDelta及Adam等优化器计算值为0时的最小限定值，用于防止分母为0等溢出错误；</li>
+<li>weight_decay :: 权重衰减参数，用于防止模型过拟合；</li>
+<li>regularization_type :: 正则化方式，默认为L2正则化，可选的有L0、L1及L2，用于防止模型过拟合；</li>
+<li>clip_gradients :: 限定梯度的最大值，用于防止梯度过大导致梯度爆炸；</li>
+</ul>
+<p>可选的caffe优化器类型：</p>
+<p>到目前的为止，caffe提供了六种优化算法来求解最优参数，在solver配置文件中，通过设置type类型来选择：</p>
+<ul>
+<li>Stochastic Gradient Descent (type: &quot;SGD&quot;或“0”)</li>
+<li>Nesterov’s Accelerated Gradient (type: &quot;Nesterov&quot;或“1”)</li>
+<li>Adaptive Gradient (type: &quot;AdaGrad&quot;或“2”)</li>
+<li>RMSprop (type: &quot;RMSProp&quot;或“3”)</li>
+<li>AdaDelta (type: &quot;AdaDelta&quot;或“4”)</li>
+<li>Adam (type: &quot;Adam&quot;或“5”)</li>
+</ul>
+<h2 id="模型保存快照相关参数"><a class="markdownIt-Anchor" href="#模型保存快照相关参数"></a> 模型保存快照相关参数</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">snapshot: 1000</span><br><span class="line">snapshot_prefix: &quot;examples/finetune_pascal_detection/pascal_det_finetune&quot;</span><br><span class="line">snapshot_diff: false</span><br><span class="line">snapshot_format: BINARYPROTO</span><br><span class="line">snapshot_after_train: true</span><br></pre></td></tr></table></figure>
+<ul>
+<li>snapshot :: 保存模型的间隔，即每隔多少次训练迭代保存一次模型快照，默认为0；</li>
+<li>snapshot_prefix :: 模型保存的路径及路径名，但无后缀扩展类型，如果不设定，则使用无扩展的prototxt路径和文件名来作为模型保存文件的路径和文件名；</li>
+<li>snapshot_diff :: 是否保存推理结果中的差异，默认不保存，如果保存可帮助调试但会增大保存文件的大小；</li>
+<li>snapshot_format :: 模型保存的类型，有“HDF5”和“BINARYPROTO”两种，默认为后者BINARYPROTO；</li>
+<li>snapshot_after_train :: 默认为真，即训练后按照模型保存设定的参数来进行快照，否则直到训练结束都不会保存模型；</li>
+</ul>
+<p>其他的solver参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">display: 1000</span><br><span class="line">average_loss: 50</span><br><span class="line">iter_size: 1</span><br><span class="line">solver_mode: GPU</span><br><span class="line">device_id: 0</span><br><span class="line">random_seed: 600</span><br><span class="line">debug_info: false</span><br><span class="line">layer_wise_reduce: true</span><br><span class="line">weights: &quot;models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel&quot;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>display :: 训练迭代多少次后显示相关信息到终端，如果置0则不会有任何有效信息打印；</li>
+<li>average_loss :: 显示上一次迭代平均损失值的间隔，默认为1，通常不设定；</li>
+<li>iter_size :: 用于多少个batch_size后再更新梯度，通常在GPU内存不足时用于扩展batch_size，真时的batch_size为iter_size*batch_size大小；</li>
+<li>solver_mode :: 训练时使用CPU还是GPU，默认为GPU；</li>
+<li>device_id :: 使用GPU时的设备id号，默认为0；</li>
+<li>random_seed :: 随机种子起始数字，默认为-1参考系统时钟；</li>
+<li>debug_info :: 默认为假，如果置真，则会打印模型网络学习过程中的状态信息，可用于分析调试；</li>
+<li>layer_wise_reduce :: 数据并行训练的重叠计算和通信，默认为真；</li>
+<li>weights :: 预训练模型路径，可用于加载预训练模型，如果命令行训练时也有定义“–weights”则其优先级更高将会覆盖掉solver文件中该参数的配置，如果命令行训练时有定义“–snapshot”时则其具有最高优先级将会覆盖掉“–weights”，如果存在多个权重模型用于加载，可使用逗号进行分离表示；</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/pytorch/" rel="tag"># pytorch</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/06/20/CUDA%E9%94%99%E8%AF%AF%E9%9B%86%E9%94%A6/" rel="prev" title="CUDA错误集锦">
+                  <i class="fa fa-chevron-left"></i> CUDA错误集锦
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+<script src="/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leslie He</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.3/dist/katex.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.3/dist/contrib/copy-tex.min.css">
+  <script class="next-config" data-name="katex" type="application/json">{&quot;copy_tex_js&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;katex@0.13.3&#x2F;dist&#x2F;contrib&#x2F;copy-tex.min.js&quot;}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+
+</body>
+</html>
