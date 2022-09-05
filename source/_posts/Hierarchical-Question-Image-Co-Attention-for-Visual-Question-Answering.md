@@ -1,8 +1,9 @@
 ---
 title: Hierarchical Question-Image Co-Attention for Visual Question Answering
 date: 2021-05-18 15:25:46
-tags:  [VQA, Attention]
-categories: VQA
+tags:  [ "VQA", "Attention" ]
+categories: 
+- [ "VQA" ]
 ---
 
 # 简介
