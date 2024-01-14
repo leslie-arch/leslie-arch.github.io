@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="yanm1ng&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      VGQ综述 | Leslie
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Leslie</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/series/" class="item-link">Series</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/series/" class="menu-link">Series</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>VGQ综述</h2>
+  <p class="post-date">2021-05-22</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h1 id="VQG-综述"><a href="#VQG-综述" class="headerlink" title="VQG 综述"></a>VQG 综述</h1><p>论文title <a target="_blank" rel="noopener" href="https://www.webofscience.com/wos/alldb/full-record/WOS:000582586400002">Visual Question Generation: The State of the Art</a></p>
+<p>Question generation : 以原始文本，数据库和语义表示等为输入自动生成问题。<br>其中最重要的两个子任务：</p>
+<ul>
+<li>理解图像<ul>
+<li>对象检测</li>
+<li>对象分类和标签</li>
+<li>对象关系检测</li>
+<li>场景理解</li>
+<li>场景分类</li>
+<li>其它</li>
+</ul>
+</li>
+<li>生成有效问题的词序列</li>
+</ul>
+<p>通常首先通过CNN获取图像的表示，再通过RNN获取生成的词序列。</p>
+<p>VQA包括在给定的图像上下文中回答给定的问题,几乎所有用于此目的的VQA数据集都包含人工预先设定的问题，最近新生成的推理数据集却与此不同，<br>其中的问题及相应的答案是使用功能性编程方法获得的。</p>
+<h1 id="视觉和自然语言任务"><a href="#视觉和自然语言任务" class="headerlink" title="视觉和自然语言任务"></a>视觉和自然语言任务</h1><p>视觉问题可分为三类：</p>
+<ul>
+<li>基础问题 :: 问题答案可由图像本身中存在的信息得出，不需要外部知识来源</li>
+<li>基于常识的问题 :: 需要外部的常识知识源以及图像中的基础信息</li>
+<li>world knowledge-based question :: 需要外部知识源用于问题生成和回答</li>
+</ul>
+<p>所有VQA算法的框架流程都包含：</p>
+<ul>
+<li>获取图像特征</li>
+<li>抽取问题特征</li>
+<li>结合问题特征和图像特征预测问题答案</li>
+</ul>
+<p>按过程可分为四类： Bayesian， encoder-decover, attention based, bilinear pooling<br>同时，使用一些其它外部知识源回答视觉问题的领域也有了新的发展。</p>
+<h2 id="Bayesian-Models"><a href="#Bayesian-Models" class="headerlink" title="Bayesian Models"></a>Bayesian Models</h2><p>VQA最早是在Bayesian框架中进行问题推理进行自动语义文本解析和场景分割。Bayesian过程可以对问题进行分类，从而检测答案类型。<br>该模型证明了开放式答案预测可以转化为多项选择问题。</p>
+<h2 id="Encoder-Decoder-Models"><a href="#Encoder-Decoder-Models" class="headerlink" title="Encoder-Decoder Models"></a>Encoder-Decoder Models</h2><p>Cho 和 Sutskever 提出的简单的序列到序列机器翻译 encoder-decoder模型被认为是语言生成任务中的突破，对图像和问题信息进行编码然后对其解码从而得到答案的灵感也来源于此。<br>基于单LSTM的编&#x2F;解码器模型依次将问题和答案的单词分别进行编&#x2F;解码，通过CNN提取的图像特征作为每个LSTM单元的输入。<br><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1505.02074">Ren et al</a>提出在回答是单个单词的情况下，将&lt;问题,回答&gt;特征向量对连接作为LSTM的输入。在ImageNet挑战的训练过程中使用VGGNet<br>最后一层隐藏层作为视觉嵌入表示。<br><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1505.05612">Gao et al</a>提出的模型使用两个独立的LSTM，一个用于问题编码，一个用于回答解码。回答生成的融合模块使用深度CNN整合问题编码表示，<br>回答编码表示和图像表示。</p>
+<h2 id="注意力模型"><a href="#注意力模型" class="headerlink" title="注意力模型"></a>注意力模型</h2><p>所有注意力模型都使用由CNN生成的区域特异性和局部特征。<br><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1511.07394">Shih et al.</a>基于注意力的图像区域和问题表示给每个回答打分，在多个候选解答中的预测正确回答。</p>
+<h2 id="bilinerar-pooling-模型"><a href="#bilinerar-pooling-模型" class="headerlink" title="bilinerar pooling 模型"></a>bilinerar pooling 模型</h2><p>图像和问题特征之间深层交互的紧凑型多模双线性池化。<br>bilinear pooling主要用于特征融合，对于从同一个样本提取出来的特征 $x$ 和特征 $y$ ，通过bilinear pooling得到两个特征融合后的向量，进而用来分类。<br>如果特征 $x$ 和特征 $y$ 来自两个特征提取器，则被称为多模双线性池化（MBP，Multimodal Bilinear Pooling）；<br>如果特征 $x$ &#x3D;特征 $y$，则被称为同源双线性池化（HBP，Homogeneous Bilinear Pooling）或者二阶池化（Second-order Pooling）。</p>
+<h2 id="结合外部知识的VQA"><a href="#结合外部知识的VQA" class="headerlink" title="结合外部知识的VQA"></a>结合外部知识的VQA</h2><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1511.06973">Wu et al.</a>使用VGGNet获取图像的高层概念和属性，然后使用这些特征生成SPARQL查询请求从知识库中抽取相关信息。<br>knowledge-based VQA,视觉概念分为三种，为每张图片标识对象，属性和场景。通常使用RDF元组存储这些概念。<br>fact-based VQA, 通过学习问题和基于知识的问题的关联回答组合的问题。从图片中抽取的视觉概念以$(subject, relation, object)$元组的方式存储。使用元组生成SPARQL的查询<br>从知识图谱中抽取问题答案。<br>world knowledge VQA，结合其背景知识回答特定人物的相关问题。该问题的第一个子任务是可视化实体链接，处理人脸定位和人脸识别。第二个子任务需要识别图片和问题中实体，<br>然后遍历知识图，如Wikidata，来抽取相关事实。</p>
+<h1 id="图像描述生成"><a href="#图像描述生成" class="headerlink" title="图像描述生成"></a>图像描述生成</h1><p>和VQG一样，图像描述任务也是以图片为输入，期望输出为文本形态。可将其视为一种特殊的机器翻译，将视觉信息翻译成文本格式。<br>图像加注方法可以分为3类：基于模板的图像加注，基于检索的图像加注和生成新的图像加注。<br>新的图像加注与生成新的问题方法类似。</p>
+<p>Multi-model space embedding:<br><a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/Q14-1017.pdf">多模态空间嵌入模型</a>通过AlexNet抽取图像特征用于图片加注，在这基础上扩展的encoder-decoder模型中，通过深度卷积网络得到的图像特征作用于LSTM隐层状态生成编码。<br>DT-RNN基于dependency tree结合图像和文本的嵌入空间。<br>m-RNN模型包含三个主要部分：语言模型部分，视觉部分（CNN），多模态部分用于融合前两部分的结果，然后生成标注。</p>
+<p>encoder-decoder模型:</p>
+<ul>
+<li>neural image caption generator (NIC)</li>
+<li>Bi-LSTM :: 生成上下文和语义丰富的图像标注</li>
+</ul>
+<p>Attention模型：</p>
+<ul>
+<li>deterministic soft attention</li>
+<li>stochastic hard attention</li>
+</ul>
+<p>Dense Captioning 模型:<br><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1511.07571.pdf">Densecap model</a>提出”Fully Convolutional Localization Network”，由一个卷积网络，一种新的全连接定位层和一个产生标签序列的RNN语言模型组成。</p>
+<ul>
+<li>模型能够描述图片中的一系列区域，而不是单个object</li>
+<li>全连接定位层，预测图片中的感兴趣区域，并使用双线性插值提取区域中的激活值</li>
+</ul>
+<p>Compositional 模型:<br><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1411.4952">Compositional</a>的思路：</p>
+<ul>
+<li>给出图像，使用视觉检测器提取图像中可能存在的单词(Weakly-spuervised approach of multiple instance learning) &amp; MIL(Multiple Instance Learning)</li>
+<li>采用传统的方法得到若干预测的captions</li>
+<li>使用DMSM（Deep Multimodal Similarity Model）模型计算相似度</li>
+</ul>
+<p>Generative 模型：基于生成网络的图像加注模型，可以生成大是不是的图像标（个人对这种模型不看好）</p>
+<p>Captioning With External Knowledge：<br><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1603.09016">Rich Image Caption</a>，针对特定场景的图像，结合知识图谱生成标：</p>
+<ul>
+<li>ResNet :: visual concept</li>
+<li>Entity Recognition Model</li>
+<li>Maxmum Entropy Language Model</li>
+<li>DMSM (模型相似度)</li>
+</ul>
+<h1 id="Text-Question-Generation-and-Answering"><a href="#Text-Question-Generation-and-Answering" class="headerlink" title="Text Question Generation and Answering"></a>Text Question Generation and Answering</h1><p>Inverse VQA:<br>VQA是根据图像和问题生成答案，iVQA是给出answer,image, 生成与之相关的question。<br>过程与VQA过程相似，用到的模型也是Bi-LSTM, GUR和encoder-decoder模型。</p>
+<p>Using Memory Network:<br>Dynamic memory network - 包含四个部分：输入模块，问题模块，episodic memory 模块和回答模块。<br>输入模块&#x2F;问题模块分别生成输入文本和问题并且生成它们各自的向量表示。episodic memory模块实现了注意力机制并选择要关注的输入部分。迭代过程用问题和上轮迭代的内存表示更新内存向量。<br>在DMN的基础上进行扩展得到的新模型<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1603.01417">DMN+</a>。</p>
+<p>Using External Knowledge Source:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1704.08384">key-value memory network based model</a></li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1603.06807">Factoid question generation model</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/E17-1036/">RNN-based encoder-decoder model</a></li>
+</ul>
+<h1 id="相关的数据集"><a href="#相关的数据集" class="headerlink" title="相关的数据集"></a>相关的数据集</h1><ul>
+<li>DAQUAQ</li>
+<li>COCO QA</li>
+<li>VQA </li>
+<li>VQG Flickr-5000, VQG COCO-5000, and VQG Bing-5000</li>
+<li>Visual Genome</li>
+<li>Visual7W</li>
+<li>CLEVR</li>
+<li>FVQA&#x2F;KVQA&#x2F;GQA</li>
+<li>CRIC</li>
+</ul>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#VQG" >
+    <span class="tag-code">VQG</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2021/05/20/R%E8%AF%AD%E8%A8%80%E5%B0%8F%E6%8A%80%E5%B7%A7/">
+        <span class="nav-arrow">← </span>
+        
+          R语言小技巧
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2021/06/08/Advanced-Image-Processing-in-R-magick/">
+        
+          Advanced Image-Processing in R-magick
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- Utterances START -->
+      <div id="utterances"></div>
+      <script src="https://utteranc.es/client.js"
+        repo=""
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>    
+      <!-- Utterances END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#VQG-%E7%BB%BC%E8%BF%B0"><span class="toc-nav-text">VQG 综述</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E8%A7%86%E8%A7%89%E5%92%8C%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E4%BB%BB%E5%8A%A1"><span class="toc-nav-text">视觉和自然语言任务</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Bayesian-Models"><span class="toc-nav-text">Bayesian Models</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Encoder-Decoder-Models"><span class="toc-nav-text">Encoder-Decoder Models</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B"><span class="toc-nav-text">注意力模型</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#bilinerar-pooling-%E6%A8%A1%E5%9E%8B"><span class="toc-nav-text">bilinerar pooling 模型</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E7%BB%93%E5%90%88%E5%A4%96%E9%83%A8%E7%9F%A5%E8%AF%86%E7%9A%84VQA"><span class="toc-nav-text">结合外部知识的VQA</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E5%9B%BE%E5%83%8F%E6%8F%8F%E8%BF%B0%E7%94%9F%E6%88%90"><span class="toc-nav-text">图像描述生成</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Text-Question-Generation-and-Answering"><span class="toc-nav-text">Text Question Generation and Answering</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E7%9B%B8%E5%85%B3%E7%9A%84%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-nav-text">相关的数据集</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://leslie-arch.github.io/2021/05/22/VGA综述/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error_icon.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error_icon.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2024 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

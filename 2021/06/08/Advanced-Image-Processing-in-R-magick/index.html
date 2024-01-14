@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="yanm1ng&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Advanced Image-Processing in R-magick | Leslie
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Leslie</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/series/" class="item-link">Series</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/series/" class="menu-link">Series</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Advanced Image-Processing in R-magick</h2>
+  <p class="post-date">2021-06-08</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>The magick package provide a modern and simple toolkit for image processing in R. It wraps the ImageMagick STL which is the most comprehensive open-source image processing library available today.</p>
+<p>The ImageMagick library has an overwhelming amount of functionality. Magick exposes a decent subset of it, but it is impossible to document everything in detail. This article introduces some basic concepts and examples to get started.</p>
+<h2 id="Installing-magick"><a href="#Installing-magick" class="headerlink" title="Installing magick"></a>Installing magick</h2><pre><code>install.packages(&quot;magick&quot;)
+</code></pre>
+<p>The binary CRAN packages work out of the box and have most important features enabled. Use magick_config to see which features and formats are supported by your version of ImageMagick.</p>
+<pre><code>library(magick)
+
+## Linking to ImageMagick 6.9.10.23
+## Enabled features: fontconfig, freetype, fftw, lcms, pango, webp, x11
+## Disabled features: cairo, ghostscript, heic, raw, rsvg
+## Using 4 threads
+str(magick::magick_config())
+
+
+sudo apt-get install libmagick++-dev
+</code></pre>
+<h2 id="Image-IO"><a href="#Image-IO" class="headerlink" title="Image IO"></a>Image IO</h2><p>What makes magick so magical is that it automatically converts and renders all common image formats. ImageMagick supports dozens of formats and automatically detects the type. Use magick::magick_config() to list the formats that your version of ImageMagick supports.</p>
+<h3 id="Read-and-write"><a href="#Read-and-write" class="headerlink" title="Read and write"></a>Read and write</h3><p>Images can be read directly from a file path, URL, or raw vector with image data with image_read. The image_info function shows some meta data about the image, similar to the imagemagick identify command line utility.</p>
+<pre><code>library(magick)
+tiger &lt;- image_read_svg(&#39;http://jeroen.github.io/images/tiger.svg&#39;, width = 350)
+print(tiger)
+##   format width height colorspace matte filesize density
+## 1    PNG   350    350       sRGB  TRUE        0   72x72
+</code></pre>
+<p>We use image_write to export an image in any format to a file on disk, or in memory if path &#x3D; NULL.</p>
+<h3 id="Render-svg-to-png-bitmap"><a href="#Render-svg-to-png-bitmap" class="headerlink" title="Render svg to png bitmap"></a>Render svg to png bitmap</h3><pre><code>image_write(tiger, path = &quot;tiger.png&quot;, format = &quot;png&quot;)
+</code></pre>
+<p>If path is a filename, image_write returns path on success such that the result can be piped into function taking a file path.</p>
+<h3 id="Converting-formats"><a href="#Converting-formats" class="headerlink" title="Converting formats"></a>Converting formats</h3><p>Magick keeps the image in memory in its original format. Specify the format parameter image_write to convert to another format. You can also internally convert the image to another format earlier, before applying transformations. This can be useful if your original format is lossy.</p>
+<pre><code>tiger_png &lt;- image_convert(tiger, &quot;png&quot;)
+image_info(tiger_png)
+##   format width height colorspace matte filesize density
+## 1    PNG   350    350       sRGB  TRUE        0   72x72
+</code></pre>
+<p>Note that size is currently 0 because ImageMagick is lazy (in the good sense) and does not render until it has to.</p>
+<h3 id="Preview"><a href="#Preview" class="headerlink" title="Preview"></a>Preview</h3><p>IDE’s with a built-in web browser (such as RStudio) automatically display magick images in the viewer. This results in a neat interactive image editing environment.</p>
+<p><em>rstudio</em><br>Alternatively, on Linux you can use image_display to preview the image in an X11 window. Finally image_browse opens the image in your system’s default application for a given type.</p>
+<pre><code># X11 only
+image_display(tiger)
+
+- System dependent
+image_browse(tiger)
+</code></pre>
+<p>Another method is converting the image to a raster object and plot it on R’s graphics display. However this is very slow and only useful in combination with other plotting functionality. See #raster below.</p>
+<h3 id="Transformations"><a href="#Transformations" class="headerlink" title="Transformations"></a>Transformations</h3><p>The best way to get a sense of available transformations is walk through the examples in the ?transformations help page in RStudio. Below a few examples to get a sense of what is possible.</p>
+<h3 id="Cut-and-edit"><a href="#Cut-and-edit" class="headerlink" title="Cut and edit"></a>Cut and edit</h3><p>Several of the transformation functions take an geometry parameter which requires a special syntax of the form AxB+C+D where each element is optional. Some examples:</p>
+<pre><code>- image_crop(image, &quot;100x150+50&quot;): crop out width:100px and height:150px starting +50px from the left
+- image_scale(image, &quot;200&quot;): resize proportionally to width: 200px
+- image_scale(image, &quot;x200&quot;): resize proportionally to height: 200px
+- image_fill(image, &quot;blue&quot;, &quot;+100+200&quot;): flood fill with blue starting at the point at x:100, y:200
+- image_border(frink, &quot;red&quot;, &quot;20x10&quot;): adds a border of 20px left+right and 10px top+bottom
+</code></pre>
+<p>The full syntax is specified in the Magick::Geometry documentation.</p>
+<pre><code># Example image
+frink &lt;- image_read(&quot;https://jeroen.github.io/images/frink.png&quot;)
+
+print(frink)
+
+##   format width height colorspace matte filesize density
+## 1    PNG   220    445       sRGB  TRUE    73494   72x72
+
+# Add 20px left/right and 10px top/bottom
+image_border(image_background(frink, &quot;hotpink&quot;), &quot;#000080&quot;, &quot;20x10&quot;)
+
+# Trim margins
+image_trim(frink)
+
+# Passport pica
+image_crop(frink, &quot;100x150+50&quot;)
+
+# Resize
+image_scale(frink, &quot;300&quot;) # width: 300px
+
+image_scale(frink, &quot;x300&quot;) # height: 300px
+
+# Rotate or mirror
+image_rotate(frink, 45)
+
+image_flip(frink)
+
+image_flop(frink)
+
+# Brightness, Saturation, Hue
+image_modulate(frink, brightness = 80, saturation = 120, hue = 90)
+
+# Paint the shirt orange
+image_fill(frink, &quot;orange&quot;, point = &quot;+100+200&quot;, fuzz = 20)
+</code></pre>
+<p>With image_fill we can flood fill starting at pixel point. The fuzz parameter allows for the fill to cross for adjacent pixels with similarish colors. Its value must be between 0 and 256^2 specifying the max geometric distance between colors to be considered equal. Here we give professor frink an orange shirt for the World Cup.</p>
+<h3 id="Filters-and-effects"><a href="#Filters-and-effects" class="headerlink" title="Filters and effects"></a>Filters and effects</h3><pre><code>ImageMagick also has a bunch of standard effects that are worth checking out.
+
+# Add randomness
+image_blur(frink, 10, 5)
+
+image_noise(frink)
+
+# Silly filters
+image_charcoal(frink)
+
+image_oilpaint(frink)
+
+image_negate(frink)
+</code></pre>
+<h3 id="Kernel-convolution"><a href="#Kernel-convolution" class="headerlink" title="Kernel convolution"></a>Kernel convolution</h3><p>The image_convolve() function applies a kernel over the image. Kernel convolution means that each pixel value is recalculated using the weighted neighborhood sum defined in the kernel matrix. For example lets look at this simple kernel:</p>
+<pre><code>kern &lt;- matrix(0, ncol = 3, nrow = 3)
+kern[1, 2] &lt;- 0.25
+kern[2, c(1, 3)] &lt;- 0.25
+kern[3, 2] &lt;- 0.25
+kern
+
+##      [,1] [,2] [,3]
+## [1,] 0.00 0.25 0.00
+## [2,] 0.25 0.00 0.25
+## [3,] 0.00 0.25 0.00
+</code></pre>
+<p>This kernel changes each pixel to the mean of its horizontal and vertical neighboring pixels, which results in a slight blurring effect in the right-hand image below:</p>
+<pre><code>img &lt;- image_resize(logo, &quot;300x300&quot;)
+img_blurred &lt;- image_convolve(img, kern)
+image_append(c(img, img_blurred))
+</code></pre>
+<p>Or use any of the standard kernels</p>
+<pre><code>img %&gt;% image_convolve(&#39;Sobel&#39;) %&gt;% image_negate()
+
+img %&gt;% image_convolve(&#39;DoG:0,0,2&#39;) %&gt;% image_negate()
+</code></pre>
+<h3 id="Text-annotation"><a href="#Text-annotation" class="headerlink" title="Text annotation"></a>Text annotation</h3><p>Finally it can be useful to print some text on top of images:</p>
+<pre><code># Add some text
+image_annotate(frink, &quot;I like R!&quot;, size = 70, gravity = &quot;southwest&quot;, color = &quot;green&quot;)
+
+# Customize text
+image_annotate(frink, &quot;CONFIDENTIAL&quot;, size = 30, color = &quot;red&quot;, boxcolor = &quot;pink&quot;,
+  degrees = 60, location = &quot;+50+100&quot;)
+
+# Fonts may require ImageMagick has fontconfig
+image_annotate(frink, &quot;The quick brown fox&quot;, font = &#39;Times&#39;, size = 30)
+</code></pre>
+<p>Fonts that are supported on most platforms include “sans”, “mono”, “serif”, “Times”, “Helvetica”, “Trebuchet”, “Georgia”, “Palatino”or “Comic Sans”.</p>
+<h3 id="Combining-with-pipes"><a href="#Combining-with-pipes" class="headerlink" title="Combining with pipes"></a>Combining with pipes</h3><p>Each of the image transformation functions returns a modified copy of the original image. It does not affect the original image.</p>
+<pre><code>frink &lt;- image_read(&quot;https://jeroen.github.io/images/frink.png&quot;)
+frink2 &lt;- image_scale(frink, &quot;100&quot;)
+image_info(frink)
+
+##   format width height colorspace matte filesize density
+## 1    PNG   220    445       sRGB  TRUE    73494   72x72
+
+image_info(frink2)
+##   format width height colorspace matte filesize density
+## 1    PNG   100    202       sRGB  TRUE        0   72x72
+</code></pre>
+<p>Hence to combine transformations you need to chain them:</p>
+<pre><code>test &lt;- image_rotate(frink, 90)
+test &lt;- image_background(test, &quot;blue&quot;, flatten = TRUE)
+test &lt;- image_border(test, &quot;red&quot;, &quot;10x10&quot;)
+test &lt;- image_annotate(test, &quot;This is how we combine transformations&quot;, color = &quot;white&quot;, size = 30)
+
+print(test)
+
+##   format width height colorspace matte filesize density
+## 1    PNG   465    240       sRGB  TRUE        0   72x72
+</code></pre>
+<p>Using magrittr pipe syntax makes it a bit more readable</p>
+<pre><code>image_read(&quot;https://jeroen.github.io/images/frink.png&quot;) %&gt;%
+  image_rotate(270) %&gt;%
+  image_background(&quot;blue&quot;, flatten = TRUE) %&gt;%
+  image_border(&quot;red&quot;, &quot;10x10&quot;) %&gt;%
+  image_annotate(&quot;The same thing with pipes&quot;, color = &quot;white&quot;, size = 30)
+</code></pre>
+<h3 id="Image-Vectors"><a href="#Image-Vectors" class="headerlink" title="Image Vectors"></a>Image Vectors</h3><p>The examples above concern single images. However all functions in magick have been vectorized to support working with layers, compositions or animation.</p>
+<p>The standard base methods [ [[, c() and length() are used to manipulate vectors of images which can then be treated as layers or frames.</p>
+<pre><code># Download earth gif and make it a bit smaller for vignette
+earth &lt;- image_read(&quot;https://jeroen.github.io/images/earth.gif&quot;) %&gt;%
+  image_scale(&quot;200x&quot;) %&gt;%
+  image_quantize(128)
+
+length(earth)
+
+## [1] 44
+
+earth
+
+head(image_info(earth))
+
+rev(earth) %&gt;% 
+  image_flip() %&gt;% 
+  image_annotate(&quot;meanwhile in Australia&quot;, size = 20, color = &quot;white&quot;)
+</code></pre>
+<h3 id="Layers"><a href="#Layers" class="headerlink" title="Layers"></a>Layers</h3><pre><code>We can stack layers on top of each other as we would in Photoshop:
+
+bigdata &lt;- image_read(&#39;https://jeroen.github.io/images/bigdata.jpg&#39;)
+frink &lt;- image_read(&quot;https://jeroen.github.io/images/frink.png&quot;)
+logo &lt;- image_read(&quot;https://jeroen.github.io/images/Rlogo.png&quot;)
+img &lt;- c(bigdata, logo, frink)
+img &lt;- image_scale(img, &quot;300x300&quot;)
+image_info(img)
+</code></pre>
+<p>A mosaic prints images on top of one another, expanding the output canvas such that that everything fits:</p>
+<pre><code>image_mosaic(img)
+</code></pre>
+<p>Flattening combines the layers into a single image which has the size of the first image:</p>
+<pre><code>image_flatten(img)
+</code></pre>
+<p>Flattening and mosaic allow for specifying alternative composite operators:</p>
+<pre><code>image_flatten(img, &#39;Add&#39;)
+
+image_flatten(img, &#39;Modulate&#39;)
+
+image_flatten(img, &#39;Minus&#39;)
+</code></pre>
+<h3 id="Combining"><a href="#Combining" class="headerlink" title="Combining"></a>Combining</h3><p>Appending means simply putting the frames next to each other:</p>
+<pre><code>image_append(image_scale(img, &quot;x200&quot;))
+</code></pre>
+<p>Use stack &#x3D; TRUE to position them on top of each other:</p>
+<pre><code>image_append(image_scale(img, &quot;100&quot;), stack = TRUE)
+</code></pre>
+<p>Composing allows for combining two images on a specific position:</p>
+<pre><code>bigdatafrink &lt;- image_scale(image_rotate(image_background(frink, &quot;none&quot;), 300), &quot;x200&quot;)
+image_composite(image_scale(bigdata, &quot;x400&quot;), bigdatafrink, offset = &quot;+180+100&quot;)
+</code></pre>
+<h3 id="Pages"><a href="#Pages" class="headerlink" title="Pages"></a>Pages</h3><p>When reading a PDF document, each page becomes an element of the vector. Note that PDF gets rendered while reading so you need to specify the density immediately.</p>
+<pre><code>manual &lt;- image_read_pdf(&#39;https://cloud.r-project.org/web/packages/magick/magick.pdf&#39;, density = 72)
+image_info(manual)
+
+manual[1]
+</code></pre>
+<h2 id="Animation"><a href="#Animation" class="headerlink" title="Animation"></a>Animation</h2><p>Instead of treating vector elements as layers, we can also make them frames in an animation!</p>
+<pre><code>image_animate(image_scale(img, &quot;200x200&quot;), fps = 1, dispose = &quot;previous&quot;)
+</code></pre>
+<p>Morphing creates a sequence of n images that gradually morph one image into another. It makes animations</p>
+<pre><code>newlogo &lt;- image_scale(image_read(&quot;https://jeroen.github.io/images/Rlogo.png&quot;))
+oldlogo &lt;- image_scale(image_read(&quot;https://jeroen.github.io/images/Rlogo-old.png&quot;))
+image_resize(c(oldlogo, newlogo), &#39;200x150!&#39;) %&gt;%
+  image_background(&#39;white&#39;) %&gt;%
+  image_morph() %&gt;%
+  image_animate(optimize = TRUE)
+</code></pre>
+<p>If you read in an existing GIF or Video file, each frame becomes a layer:</p>
+<pre><code># Foreground image
+banana &lt;- image_read(&quot;https://jeroen.github.io/images/banana.gif&quot;)
+banana &lt;- image_scale(banana, &quot;150&quot;)
+image_info(banana)
+</code></pre>
+<p>Manipulate the individual frames and put them back into an animation:</p>
+<pre><code># Background image
+background &lt;- image_background(image_scale(logo, &quot;200&quot;), &quot;white&quot;, flatten = TRUE)
+
+# Combine and flatten frames
+frames &lt;- image_composite(background, banana, offset = &quot;+70+30&quot;)
+
+# Turn frames into animation
+animation &lt;- image_animate(frames, fps = 10, optimize = TRUE)
+print(animation)
+</code></pre>
+<p>Animations can be saved as GIF of MPEG files:</p>
+<pre><code>image_write(animation, &quot;Rlogo-banana.gif&quot;)
+</code></pre>
+<h3 id="Drawing-and-Graphics"><a href="#Drawing-and-Graphics" class="headerlink" title="Drawing and Graphics"></a>Drawing and Graphics</h3><p>A relatively recent addition to the package is a native R graphics device which produces a magick image object. This can either be used like a regular device for making plots, or alternatively to open a device which draws onto an existing image using pixel coordinates.</p>
+<ul>
+<li><p>Graphics device<br>The image_graph() function opens a new graphics device similar to e.g. png() or x11(). It returns an image object to which the plot(s) will be written. Each “page” in the plotting device will become a frame in the image object.</p>
+<h1 id="Produce-image-using-graphics-device"><a href="#Produce-image-using-graphics-device" class="headerlink" title="Produce image using graphics device"></a>Produce image using graphics device</h1><p>  fig &lt;- image_graph(width &#x3D; 400, height &#x3D; 400, res &#x3D; 96)<br>  ggplot2::qplot(mpg, wt, data &#x3D; mtcars, colour &#x3D; cyl)<br>  dev.off()</p>
+</li>
+</ul>
+<p>We can easily post-process the figure using regular image operations.</p>
+<pre><code># Combine
+out &lt;- image_composite(fig, frink, offset = &quot;+70+30&quot;)
+print(out)
+</code></pre>
+<ul>
+<li><p>Drawing device<br>Another way to use the graphics device is to draw on top of an exiting image using pixel coordinates.</p>
+<h1 id="Or-paint-over-an-existing-image"><a href="#Or-paint-over-an-existing-image" class="headerlink" title="Or paint over an existing image"></a>Or paint over an existing image</h1><p>  img &lt;- image_draw(frink)<br>  rect(20, 20, 200, 100, border &#x3D; “red”, lty &#x3D; “dashed”, lwd &#x3D; 5)<br>  abline(h &#x3D; 300, col &#x3D; ‘blue’, lwd &#x3D; ‘10’, lty &#x3D; “dotted”)<br>  text(30, 250, “Hoiven-Glaven”, family &#x3D; “monospace”, cex &#x3D; 4, srt &#x3D; 90)<br>  palette(rainbow(11, end &#x3D; 0.9))<br>  symbols(rep(200, 11), seq(0, 400, 40), circles &#x3D; runif(11, 5, 35),<br>bg &#x3D; 1:11, inches &#x3D; FALSE, add &#x3D; TRUE)<br>  dev.off()<br>  print(img)</p>
+</li>
+</ul>
+<p>By default image_draw() sets all margins to 0 and uses graphics coordinates to match image size in pixels (width x height) where (0,0) is the top left corner. Note that this means the y axis increases from top to bottom which is the opposite of typical graphics coordinates. You can override all this by passing custom xlim, ylim or mar values to image_draw.</p>
+<ul>
+<li><p>Animated Graphics<br>The graphics device supports multiple frames which makes it easy to create animated graphics. The code below shows how you would implement the example from the very cool gganimate package using the magick graphics device.</p>
+<p>  library(gapminder)<br>  library(ggplot2)<br>  img &lt;- image_graph(600, 340, res &#x3D; 96)<br>  datalist &lt;- split(gapminder, gapminder$year)<br>  out &lt;- lapply(datalist, function(data){<br>p &lt;- ggplot(data, aes(gdpPercap, lifeExp, size &#x3D; pop, color &#x3D; continent)) +<br>  scale_size(“population”, limits &#x3D; range(gapminder$pop)) + geom_point() + ylim(20, 90) +<br>  scale_x_log10(limits &#x3D; range(gapminder$gdpPercap)) + ggtitle(data$year) + theme_classic()<br>print(p)<br>  })<br>  dev.off()<br>  animation &lt;- image_animate(img, fps &#x3D; 2, optimize &#x3D; TRUE)<br>  print(animation)</p>
+</li>
+</ul>
+<p>To write it to a file you would simply do:</p>
+<pre><code>image_write(animation, &quot;gapminder.gif&quot;)
+</code></pre>
+<h3 id="Raster-Images"><a href="#Raster-Images" class="headerlink" title="Raster Images"></a>Raster Images</h3><p>Magick images can also be converted to raster objects for use with R’s graphics device. Thereby we can combine it with other graphics tools. However do note that R’s graphics device is very slow and has a very different coordinate system which reduces the quality of the image.</p>
+<ul>
+<li><p>Base R rasters<br>Base R has an as.raster format which converts the image to a vector of strings. The paper Raster Images in R Graphics by Paul Murrell gives a nice overview.</p>
+<p>  plot(as.raster(frink))</p>
+<h1 id="Print-over-another-graphic"><a href="#Print-over-another-graphic" class="headerlink" title="Print over another graphic"></a>Print over another graphic</h1><p>  plot(cars)<br>  rasterImage(frink, 21, 0, 25, 80)</p>
+</li>
+<li><p>The grid package<br>The grid package makes it easier to overlay a raster on the graphics device without having to adjust for the x&#x2F;y coordinates of the plot.</p>
+<p>  library(ggplot2)<br>  library(grid)<br>  qplot(speed, dist, data &#x3D; cars, geom &#x3D; c(“point”, “smooth”))</p>
+<h2 id="geom-smooth-using-method-‘loess’-and-formula-‘y-x’"><a href="#geom-smooth-using-method-‘loess’-and-formula-‘y-x’" class="headerlink" title="geom_smooth() using method &#x3D; ‘loess’ and formula ‘y ~ x’"></a>geom_smooth() using method &#x3D; ‘loess’ and formula ‘y ~ x’</h2><p>  grid.raster(frink)</p>
+</li>
+</ul>
+<h3 id="OCR-text-extraction"><a href="#OCR-text-extraction" class="headerlink" title="OCR text extraction"></a>OCR text extraction</h3><p>A recent addition to the package is to extract text from images using OCR. This requires the tesseract package:</p>
+<pre><code>install.packages(&quot;tesseract&quot;)
+img &lt;- image_read(&quot;http://jeroen.github.io/images/testocr.png&quot;)
+print(img)
+## # A tibble: 1 x 7
+##   format width height co
+
+lorspace matte filesize density
+##   &lt;chr&gt;  &lt;int&gt;  &lt;int&gt; &lt;chr&gt;      &lt;lgl&gt;    &lt;int&gt; &lt;chr&gt;  
+## 1 PNG      640    480 sRGB       TRUE     23359 72x72
+
+# Extract text
+cat(image_ocr(img))
+</code></pre>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#R" >
+    <span class="tag-code">R</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2021/05/22/VGA%E7%BB%BC%E8%BF%B0/">
+        <span class="nav-arrow">← </span>
+        
+          VGQ综述
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2021/06/15/%E7%A9%BA%E9%97%B4%E9%87%91%E5%AD%97%E5%A1%94%E6%B1%A0%E5%8C%96/">
+        
+          空间金字塔池化
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- Utterances START -->
+      <div id="utterances"></div>
+      <script src="https://utteranc.es/client.js"
+        repo=""
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>    
+      <!-- Utterances END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Installing-magick"><span class="toc-nav-text">Installing magick</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Image-IO"><span class="toc-nav-text">Image IO</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Read-and-write"><span class="toc-nav-text">Read and write</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Render-svg-to-png-bitmap"><span class="toc-nav-text">Render svg to png bitmap</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Converting-formats"><span class="toc-nav-text">Converting formats</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Preview"><span class="toc-nav-text">Preview</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Transformations"><span class="toc-nav-text">Transformations</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Cut-and-edit"><span class="toc-nav-text">Cut and edit</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Filters-and-effects"><span class="toc-nav-text">Filters and effects</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Kernel-convolution"><span class="toc-nav-text">Kernel convolution</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Text-annotation"><span class="toc-nav-text">Text annotation</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Combining-with-pipes"><span class="toc-nav-text">Combining with pipes</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Image-Vectors"><span class="toc-nav-text">Image Vectors</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Layers"><span class="toc-nav-text">Layers</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Combining"><span class="toc-nav-text">Combining</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Pages"><span class="toc-nav-text">Pages</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Animation"><span class="toc-nav-text">Animation</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Drawing-and-Graphics"><span class="toc-nav-text">Drawing and Graphics</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Produce-image-using-graphics-device"><span class="toc-nav-text">Produce image using graphics device</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Or-paint-over-an-existing-image"><span class="toc-nav-text">Or paint over an existing image</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Raster-Images"><span class="toc-nav-text">Raster Images</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Print-over-another-graphic"><span class="toc-nav-text">Print over another graphic</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#geom-smooth-using-method-%E2%80%98loess%E2%80%99-and-formula-%E2%80%98y-x%E2%80%99"><span class="toc-nav-text">geom_smooth() using method &#x3D; ‘loess’ and formula ‘y ~ x’</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#OCR-text-extraction"><span class="toc-nav-text">OCR text extraction</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://leslie-arch.github.io/2021/06/08/Advanced-Image-Processing-in-R-magick/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error_icon.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error_icon.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2024 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

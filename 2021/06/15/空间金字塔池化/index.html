@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="yanm1ng&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      空间金字塔池化 | Leslie
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Leslie</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/series/" class="item-link">Series</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/series/" class="menu-link">Series</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>空间金字塔池化</h2>
+  <p class="post-date">2021-06-15</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>原论文地址：<br><a href="https://link.zhihu.com/?target=https://arxiv.org/abs/1406.4729">Spatial Pyramid Pooling in Deep Convolutional Networks for Visual Recognition</a></p>
+<h1 id="SPPNet的动机"><a href="#SPPNet的动机" class="headerlink" title="SPPNet的动机"></a>SPPNet的动机</h1><p>一般而言，对于一个CNN模型，可以将其分为两个部分：</p>
+<ul>
+<li>前面包含卷积层、激活函数层、池化层的特征提取网络，下称CNN_Pre</li>
+<li>后面的全连接网络，下称CNN_Post</li>
+</ul>
+<p>许多CNN模型都对输入的图片大小有要求，实际上CNN_Pre对输入的图片没有要求，可以简单认为其将图片缩小了固定的倍数，而CNN_Post对输入的维度有要求，简而言之，限制输入CNN模型的图片尺寸是为了迁就CNN_Post。</p>
+<p>SPPNet的立意就在于，找到一种合适的方式，无论CNN_Pre输出的feature maps尺寸是怎样，都能输出固定的维度传给CNN_Post，如下图。</p>
+<hr>
+<p>  <img src="/figure1.jpg" alt="Spatial Pyramid Pooling"></p>
+<h1 id="SPPNet的实现"><a href="#SPPNet的实现" class="headerlink" title="SPPNet的实现"></a>SPPNet的实现</h1><p>Pytorch<a href="https://link.zhihu.com/?target=https://github.com/GitHberChen/Pytorch-Implement-of-Papers/blob/master/SPP_layer.py">实现参考</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">import math</span><br><span class="line">import torch</span><br><span class="line">from torch import nn</span><br><span class="line"># https://github.com/yueruchen/sppnet-pytorch/blob/master/spp_layer.py</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def spatial_pyramid_pool(self, previous_conv, num_sample, previous_conv_size, out_pool_size):</span><br><span class="line">    &#x27;&#x27;&#x27;</span><br><span class="line">    previous_conv: a tensor vector of previous convolution layer</span><br><span class="line">    num_sample: an int number of image in the batch</span><br><span class="line">    previous_conv_size: an int vector [height, width] of the matrix features size of previous convolution layer</span><br><span class="line">    out_pool_size: a int vector of expected output size of max pooling layer</span><br><span class="line"></span><br><span class="line">    returns: a tensor vector with shape [1 x n] is the concentration of multi-level pooling</span><br><span class="line">    &#x27;&#x27;&#x27;</span><br><span class="line">    # print(previous_conv.size())</span><br><span class="line">    for i in range(len(out_pool_size)):</span><br><span class="line">        # print(previous_conv_size)</span><br><span class="line">        h_wid = int(math.ceil(previous_conv_size[0] / out_pool_size[i]))</span><br><span class="line">        w_wid = int(math.ceil(previous_conv_size[1] / out_pool_size[i]))</span><br><span class="line">        h_pad = (h_wid * out_pool_size[i] - previous_conv_size[0] + 1) / 2</span><br><span class="line">        w_pad = (w_wid * out_pool_size[i] - previous_conv_size[1] + 1) / 2</span><br><span class="line">        maxpool = nn.MaxPool2d((h_wid, w_wid), stride=(h_wid, w_wid), padding=(h_pad, w_pad))</span><br><span class="line">        x = maxpool(previous_conv)</span><br><span class="line">        if (i == 0):</span><br><span class="line">            spp = x.view(num_sample, -1)</span><br><span class="line">            # print(&quot;spp size:&quot;,spp.size())</span><br><span class="line">        else:</span><br><span class="line">            # print(&quot;size:&quot;,spp.size())</span><br><span class="line">            spp = torch.cat((spp, x.view(num_sample, -1)), 1)</span><br><span class="line">    return spp</span><br></pre></td></tr></table></figure>
+
+<p>SPP的本质就是多层maxpool，只不过为了对于不同尺寸大小 $a \times a$ 的featur map 生成固定大小 $n \times n$ 的的输出，那么 $pool_{n \times n}$ 的滑窗win大小，以及步长str都要作自适应的调整：<br>$$<br>win &#x3D; ceil(a &#x2F; n) \<br>str &#x3D; floor(a &#x2F; n)<br>$$</p>
+<p>ceil、floor分别表示上取整、下取整。</p>
+<p>然后多个不同固定输出尺寸的 $Pool$ 组合在一起就构成了SPP Layer，在论文中就用了 $pool_{5 \times 5}$ 、$pool_{4 \times 4}$、$pool_{3 \times 3}$、$pool_{2 \times 2}$、$pool_{1 \times 1}$的组合，对于尺寸为 $(c, a, a)$ 的feature maps，该组合的输出为 $(c, 55)$</p>
+<hr>
+<p><img src="/figure3.jpg" alt="Conv and SPP"></p>
+<h1 id="SPP作用"><a href="#SPP作用" class="headerlink" title="SPP作用"></a>SPP作用</h1><p>对于不同尺寸的CNN_Pre输出能够输出固定大小的向量当然是其最大的好处，除此之外SPP的优点还有：</p>
+<ul>
+<li>可以提取不同尺寸的空间特征信息，可以提升模型对于空间布局和物体变性的鲁棒性。</li>
+<li>可以避免将图片resize、crop成固定大小输入模型的弊端。</li>
+</ul>
+<p>resize、crop后，一方面是resize会导致图片中的物体尺寸变形，比如下面这个劳拉；<br>另一方面，crop会导致图片不同位置的信息出现频率不均衡，例如图片中间的部分会比角落的部分会被CNN看到更多次。</p>
+<center class="half">
+<img src="1.jpg" width="40%"/><img src="2.jpg" width="40%"/>
+</center>
+
+<h2 id="图像分类"><a href="#图像分类" class="headerlink" title="图像分类"></a>图像分类</h2><p>将SPP层添加到原有的CNN模型中可以提高其模型表现，有趣的是，最大的提升出现在表现最好的网络Overfeat-7上。由于SPP层输出不变的特性，训练时可以采用不同尺寸的图片，如果在 $224 \times 224$  的基础上增加 $180 \times 180$ 的尺寸进行训练。另外，ZFNet使用no SPP $36 \times 256$ 的全连接和$pool_{4 \times 4}$、$pool_{3 \times 3}$、$pool_{2 \times 2}$、$pool_{1 \times 1}$组合的SPP输出 $30 \times 256$ 的维度给全连接层进行对比，有SPP层的表现更好，证明了SPP-ZFNet并非靠更多的参数取胜，而是靠其本身的特性取胜。</p>
+<h2 id="物体检测"><a href="#物体检测" class="headerlink" title="物体检测"></a>物体检测</h2><p>SPPNet用于物体检测只需对图像（每种尺寸下）做一次特征提取，比当时的 R-CNN 快了很多，具体算法流程如下：</p>
+<ul>
+<li>使用selective search 生成2000个Proposal区域。</li>
+<li>将图片resize 成 $s &#x3D; min(w, h) \in {480, 567, 688, 864, 1200}$ ，每种尺寸使用CNN做一次特征提取。</li>
+<li>对于每个Proposal找到Proposal区域大小最接近 $224 \times 224$ 的那个尺寸，找到feature maps上对应的区域，左上角坐标 $x_{lt} &#x3D; floor(x&#x2F;S)+1$ ，右下角坐标 $x_{rb}&#x3D;ceil(x&#x2F;S)-1$ ，其中 $x$ 为Proposal于图像上的像素坐标，$S$为feature maps 的最终Stride大小，floor、ceil分别为下取整、上取整。找到对应区域后，使用 $pool_{6 \times 6}$、$pool_{3 \times 3}$、$pool_{2 \times 2}$、$pool_{1 \times 1}$对该区域的feature map 进行特征提取，得到 $50 \times Channel$ 维的特征向量。</li>
+<li>每一个类别都使用训练好的二值分类SVM对这个特征向量进行判定，or 使用全连接层+(class_num+1)路softmax进行类别判定。</li>
+<li>边框回归，NMS。</li>
+</ul>
+<p>SPP和Fast R-CNN的ROI Pooling是一脉相承的。</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#CNN" >
+    <span class="tag-code">CNN</span>
+  </a>
+
+  <a href="/tags#pooling" >
+    <span class="tag-code">pooling</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2021/06/08/Advanced-Image-Processing-in-R-magick/">
+        <span class="nav-arrow">← </span>
+        
+          Advanced Image-Processing in R-magick
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2021/06/16/%E8%B4%BA%E7%8E%9F%E8%8F%81%E7%97%85%E4%BA%86/">
+        
+          贺玟菁病了
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- Utterances START -->
+      <div id="utterances"></div>
+      <script src="https://utteranc.es/client.js"
+        repo=""
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>    
+      <!-- Utterances END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#SPPNet%E7%9A%84%E5%8A%A8%E6%9C%BA"><span class="toc-nav-text">SPPNet的动机</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#SPPNet%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-nav-text">SPPNet的实现</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#SPP%E4%BD%9C%E7%94%A8"><span class="toc-nav-text">SPP作用</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB"><span class="toc-nav-text">图像分类</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B"><span class="toc-nav-text">物体检测</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://leslie-arch.github.io/2021/06/15/空间金字塔池化/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error_icon.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error_icon.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2024 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

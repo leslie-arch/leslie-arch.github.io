@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="yanm1ng&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Leslie
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Leslie</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/series/" class="item-link">Series</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/series/" class="menu-link">Series</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2024/01/14/hello-world/">Hello World</a>
+      </h2>
+      <p class="article-date">January 14, 2024</p>
+      
+      <div class="article-summary">
+        
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer ...
+        
+      </div>
+      <a class="more" href="/2024/01/14/hello-world/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2021/07/06/solver%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0/">solver配置参数</a>
+      </h2>
+      <p class="article-date">July 6, 2021</p>
+      
+        
+  <a href="/tags#pytorch" >
+    <span class="tag-code">pytorch</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          神经网络模型都通过前向推理和反向梯度传播进行模型优化，并通过权重参数更新改善网络损失函数。solver学习的任务分为三个阶段：监督优化，参数更新，计算损失和梯度。
+通常优化器在网络中被抽象为标准的方法。训练时可以通过solver配置文件定义参数，常用的配置参数达40多个。
+123456789 ...
+        
+      </div>
+      <a class="more" href="/2021/07/06/solver%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2021/06/20/CUDA%E9%94%99%E8%AF%AF%E9%9B%86%E9%94%A6/">CUDA错误集锦</a>
+      </h2>
+      <p class="article-date">June 20, 2021</p>
+      
+        
+  <a href="/tags#CUDA" >
+    <span class="tag-code">CUDA</span>
+  </a>
+
+  <a href="/tags#devel" >
+    <span class="tag-code">devel</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          我的实验环境，是拉了一个tensorflow 2.2.2的docker镜像，cuda 10.0&#x2F;1&#x2F;2三个版本。
+1234lrwxrwxrwx 1 root root   20 Jun 20 10:54 cuda -&gt; /usr/local/cuda-10.1drw ...
+        
+      </div>
+      <a class="more" href="/2021/06/20/CUDA%E9%94%99%E8%AF%AF%E9%9B%86%E9%94%A6/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2021/06/16/%E8%B4%BA%E7%8E%9F%E8%8F%81%E7%97%85%E4%BA%86/">贺玟菁病了</a>
+      </h2>
+      <p class="article-date">June 16, 2021</p>
+      
+        
+  <a href="/tags#成长" >
+    <span class="tag-code">成长</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          几个月以前，我跟玟菁说，“玟菁，爸爸带你去游泳好不好，你小时候可喜欢游泳了”。不承想，这句话被她牢牢记住了，逢人就说，爸爸要带我去游泳~前两天端午放假，她小姨问，假期去哪玩啊，这小家伙又提起这事儿了，“我爸爸带我去游泳”。既然她都这么说了，她妈妈也看了周围有一个水世界乐园，那就兑现这个承诺吧 ...
+        
+      </div>
+      <a class="more" href="/2021/06/16/%E8%B4%BA%E7%8E%9F%E8%8F%81%E7%97%85%E4%BA%86/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2021/06/15/%E7%A9%BA%E9%97%B4%E9%87%91%E5%AD%97%E5%A1%94%E6%B1%A0%E5%8C%96/">空间金字塔池化</a>
+      </h2>
+      <p class="article-date">June 15, 2021</p>
+      
+        
+  <a href="/tags#CNN" >
+    <span class="tag-code">CNN</span>
+  </a>
+
+  <a href="/tags#pooling" >
+    <span class="tag-code">pooling</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          原论文地址：Spatial Pyramid Pooling in Deep Convolutional Networks for Visual Recognition
+SPPNet的动机一般而言，对于一个CNN模型，可以将其分为两个部分：
+
+前面包含卷积层、激活函数层、池化层的特征提取网络， ...
+        
+      </div>
+      <a class="more" href="/2021/06/15/%E7%A9%BA%E9%97%B4%E9%87%91%E5%AD%97%E5%A1%94%E6%B1%A0%E5%8C%96/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2021/06/08/Advanced-Image-Processing-in-R-magick/">Advanced Image-Processing in R-magick</a>
+      </h2>
+      <p class="article-date">June 8, 2021</p>
+      
+        
+  <a href="/tags#R" >
+    <span class="tag-code">R</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          The magick package provide a modern and simple toolkit for image processing in R. It wraps the ImageMagick STL which is the most comprehensive ope ...
+        
+      </div>
+      <a class="more" href="/2021/06/08/Advanced-Image-Processing-in-R-magick/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2021/05/22/VGA%E7%BB%BC%E8%BF%B0/">VGQ综述</a>
+      </h2>
+      <p class="article-date">May 22, 2021</p>
+      
+        
+  <a href="/tags#VQG" >
+    <span class="tag-code">VQG</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          VQG 综述论文title Visual Question Generation: The State of the Art
+Question generation : 以原始文本，数据库和语义表示等为输入自动生成问题。其中最重要的两个子任务：
+
+理解图像
+对象检测
+对象分类和标签
+对象关系 ...
+        
+      </div>
+      <a class="more" href="/2021/05/22/VGA%E7%BB%BC%E8%BF%B0/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2021/05/20/R%E8%AF%AD%E8%A8%80%E5%B0%8F%E6%8A%80%E5%B7%A7/">R语言小技巧</a>
+      </h2>
+      <p class="article-date">May 20, 2021</p>
+      
+        
+  <a href="/tags#R" >
+    <span class="tag-code">R</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          R 语言使用记录list
+使用”names()”方法查看list中的成员
+列表的一个元素也可以称为列表的一个“变量”， 单个列表元素必须用两重方括号格式访问
+列表的单个元素也可以用$格式访问
+列表的单个元素也可以用$格式访问
+
+packages
+已加载的包 :: (.packages())
+ ...
+        
+      </div>
+      <a class="more" href="/2021/05/20/R%E8%AF%AD%E8%A8%80%E5%B0%8F%E6%8A%80%E5%B7%A7/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2021/05/18/Hierarchical-Question-Image-Co-Attention-for-Visual-Question-Answering/">Hierarchical Question-Image Co-Attention for Visual Question Answering</a>
+      </h2>
+      <p class="article-date">May 18, 2021</p>
+      
+        
+  <a href="/tags#VQA" >
+    <span class="tag-code">VQA</span>
+  </a>
+
+  <a href="/tags#Attention" >
+    <span class="tag-code">Attention</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          简介
+这篇文章提出了“协同注意力”机制，不只考虑视觉上的注意力（看哪儿），同时也考虑问题本身（重点词）。
+另外，在图像和问题解析时构建“单词-短语-问题”三层分层结构。单词层使用嵌入矩阵将单词转化成词向量；
+短语层使用1维核卷积获取词组中包含的信息，通过将词表征向量和不同时序过滤器做卷积，然 ...
+        
+      </div>
+      <a class="more" href="/2021/05/18/Hierarchical-Question-Image-Co-Attention-for-Visual-Question-Answering/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2021/05/14/%E8%B4%BA%E7%8E%9F%E8%8F%81%E7%9A%84%E6%96%B0%E8%A2%AB%E5%AD%90/">贺玟菁的新被子</a>
+      </h2>
+      <p class="article-date">May 14, 2021</p>
+      
+        
+  <a href="/tags#成长" >
+    <span class="tag-code">成长</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          前天，她奶奶从老家回来，给她带了一个小被子。她喜欢的不得了。
+粉红色，上面有只恐龙。跟她视频的时候，她趴在那只恐龙上，双手张开，用脸贴着它，脸上全是笑。
+我说，你用它裹着睡觉吧。
+她奶奶说，昨天晚上就是裹着睡的，都不蹬被子了。哈哈，这个小家伙，是有多喜欢这只小恐龙啊。
+
+        
+      </div>
+      <a class="more" href="/2021/05/14/%E8%B4%BA%E7%8E%9F%E8%8F%81%E7%9A%84%E6%96%B0%E8%A2%AB%E5%AD%90/">Read more</a>
+    </article>
+  
+
+  
+</main>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2024 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>
