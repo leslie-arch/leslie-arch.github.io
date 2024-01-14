@@ -1,6 +1,6 @@
 ---
-title: categories
-date: 2021-05-14 11:49:00
-type: "categories"
-comment: false
+title: Categories
+date: 2024-01-14 14:54:50
+type: 'categories'
+layout: 'categories'
 ---
