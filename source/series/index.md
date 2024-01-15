@@ -1,5 +1,5 @@
 ---
 title: Series
-type: categories
-layout: categories
+type: series
+layout: series
 ---
